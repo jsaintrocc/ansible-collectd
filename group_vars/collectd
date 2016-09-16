@@ -1,0 +1,7 @@
+# Collect metrics every 60 seconds
+collectd_global_options_default_interval: 60
+# Define additional global option
+collectd_global_options_custom:
+  - options:
+    - PIDFile: /var/run/collectd.pid
+

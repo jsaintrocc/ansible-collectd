@@ -1,0 +1,55 @@
+---
+
+- name: Test distribution
+  assert:
+    that: >
+      ansible_os_family == "RedHat" or
+      ansible_os_family == "Debian"
+
+- name: Add the OS specific varibles
+  include_vars: "{{ ansible_os_family }}.yaml"
+
+- name: Install carbon packages for RedHat
+  yum:
+    name: "{{ item }}"
+  with_items: carbon_packages
+  when: ansible_os_family == 'RedHat'
+  notify:
+    - Restart Carbon services
+  tags:
+    - carbon_pkg
+
+- name: Install carbon packages for Debian
+  apt:
+    name: "{{ item }}"
+  with_items: carbon_packages
+  when: ansible_os_family == 'Debian'
+  notify:
+    - Restart Carbon services
+  tags:
+    - carbon_pkg
+
+- name: Configure carbon configuration
+  template:
+    src: carbon.conf.j2
+    dest: "{{ carbon_config_path }}"
+  notify:
+    - Restart Carbon services
+  tags:
+    - carbon_config
+
+- name: Configure storage schemas
+  template:
+    src: storage-schemas.conf.j2
+    dest: "{{ carbon_storage_schemas_path }}"
+  notify:
+    - Restart Carbon services
+  tags:
+    - carbon_config
+
+- name: Make Carbon service running
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items: carbon_services
