@@ -1,0 +1,21 @@
+---
+- name: Add collectd backports keyring for RedHat
+  rpm_key:
+    key: http://pkg.ci.collectd.org/pubkey.asc
+    state: present
+
+- name: Add collectd backports repository for RedHat
+  yum_repository:
+    name: collectd
+    description: "collectd repo"
+    baseurl: "https://pkg.ci.collectd.org/rpm/collectd-5.5/epel-{{ ansible_lsb.major_release }}-{{ ansible_architecture }}/"
+    state: present
+
+- name: Use Redhat Packages
+  set_fact:
+    collectd_pkgs: "{{ collectd_redhat_pkgs }}"
+
+- name: Use Redhat config path
+  set_fact:
+    collectd_config_path: "{{ collectd_redhat_config_path }}"
+

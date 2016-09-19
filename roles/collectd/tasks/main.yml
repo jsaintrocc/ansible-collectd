@@ -1,0 +1,40 @@
+---
+
+- name: Require 2.X version of Ansible
+  assert:
+    that: ansible_version.major >= 2
+
+- name: Prep for Ubuntu
+  include: installs/ubuntu.yml
+  when: ansible_os_family == "Debian"
+  static: false
+
+- name: Prep for Redhat
+  include: installs/redhat.yml
+  when: ansible_os_family == "RedHat"
+  static: false
+
+- name: Install Collectd package and extras
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ collectd_pkgs }}"
+  notify:
+    - Restart collectd service
+  tags:
+    - collectd_pkg
+
+- name: Configure CollectD
+  template:
+    src: collectd.conf.j2
+    dest: "{{ collectd_config_path }}"
+  notify:
+    - Restart collectd service
+  tags:
+    - collectd_config
+
+- name: Make sure collectd service is enabled and running
+  service:
+    name: collectd
+    enabled: yes
+    state: running

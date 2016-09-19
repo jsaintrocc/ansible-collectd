@@ -1,0 +1,5 @@
+---
+- hosts: oscomp-cc38-h01
+  become: true
+  roles:
+    - collectd

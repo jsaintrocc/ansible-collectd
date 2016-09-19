@@ -1,17 +1,15 @@
 ---
 
 # Package to be installed (you can force a specific version here)
-collectd_pkg: collectd
+collectd_redhat_pkgs:
+  - collectd
+  - collectd-virt
+  - collectd-ceph
+collectd_ubuntu_pkgs:
+  - collectd
 
-# List of additional plugins (e.g. collectd-python)
-collectd_pkg_plugins: []
-
-# Default path to the main config file
-collectd_config_path: /etc/collectd.conf
-
-# Default list of custom types
-collectd_types: {}
-
+collectd_redhat_config_path: "/etc/collectd.conf"
+collectd_ubuntu_config_path: "/etc/collectd/collectd.conf"
 
 # Global options
 collectd_global_options_default_hostname: "{{ ansible_hostname }}"

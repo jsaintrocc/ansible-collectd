@@ -1,0 +1,20 @@
+---
+- name: Add collectd backports keyring for Ubuntu
+  apt_key:
+    url: http://pkg.ci.collectd.org/pubkey.asc
+    state: present
+
+- name: Add collectd backports repository for Ubuntu
+  apt_repository:
+    repo: 'deb http://pkg.ci.collectd.org/deb/ {{ ansible_distribution_release }} collectd-5.5'
+    state: present
+    update_cache: yes
+
+- name: Use Ubuntu packages
+  set_fact:
+    collectd_pkgs: "{{ collectd_ubuntu_pkgs }}"
+
+- name: Use Ubuntu config path
+  set_fact:
+    collectd_config_path: "{{ collectd_ubuntu_config_path }}"
+

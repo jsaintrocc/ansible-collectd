@@ -1,0 +1,6 @@
+---
+- hosts: pistorestat-cc38-h01
+  user: piops
+  become: true
+  roles:
+    - collectd
