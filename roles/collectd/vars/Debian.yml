@@ -1,0 +1,7 @@
+---
+# Packages to install
+collectd_pkgs:
+  - collectd
+
+# Ubuntu config path 
+collectd_config_path: "/etc/collectd/collectd.conf"

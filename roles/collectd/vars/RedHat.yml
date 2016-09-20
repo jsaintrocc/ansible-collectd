@@ -1,0 +1,9 @@
+---
+# Packages to install
+collectd_pkgs:
+  - collectd
+  - collectd-virt
+  - collectd-ceph
+
+# Ubuntu config path 
+collectd_config_path: "/etc/collectd.conf"
