@@ -1,7 +1,11 @@
-# Collect metrics every 60 seconds
-collectd_global_options_default_interval: 60
-# Define additional global option
-collectd_global_options_custom:
-  - options:
-    - PIDFile: /var/run/collectd.pid
-
+---
+# Package to be installed (you can force a specific version here)
+#collectd_redhat_pkgs:
+#  - collectd
+#  - collectd-virt
+#  - collectd-ceph
+#collectd_ubuntu_pkgs:
+#  - collectd
+#
+#collectd_redhat_config_path: "/etc/collectd.conf"
+#collectd_ubuntu_config_path: "/etc/collectd/collectd.conf"

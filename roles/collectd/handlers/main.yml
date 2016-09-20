@@ -1,5 +1,4 @@
 ---
-
 - name: Restart collectd service
   service:
     name: collectd

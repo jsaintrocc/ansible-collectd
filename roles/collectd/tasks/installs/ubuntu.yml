@@ -17,4 +17,3 @@
 - name: Use Ubuntu config path
   set_fact:
     collectd_config_path: "{{ collectd_ubuntu_config_path }}"
-

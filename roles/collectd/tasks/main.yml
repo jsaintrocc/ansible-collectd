@@ -1,5 +1,4 @@
 ---
-
 - name: Require 2.X version of Ansible
   assert:
     that: ansible_version.major >= 2
@@ -28,6 +27,7 @@
   template:
     src: collectd.conf.j2
     dest: "{{ collectd_config_path }}"
+    force: yes
   notify:
     - Restart collectd service
   tags:
@@ -37,4 +37,4 @@
   service:
     name: collectd
     enabled: yes
-    state: running
+    state: started
