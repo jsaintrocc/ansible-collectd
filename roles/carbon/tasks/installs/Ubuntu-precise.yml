@@ -1,0 +1,12 @@
+---
+- name: Add backport ppa for Ubuntu precise
+  apt_repository:
+    repo: 'ppa:bigon/dotnl'
+    state: present
+    update_cache: yes
+
+- name: Copy missing carbin-aggregator init script for Ubuntu precise
+  copy:
+    src: carbon-aggregator.upstart.init
+    dest: /etc/init.d/carbon-aggregator
+    mode: 0755
