@@ -1,5 +1,5 @@
 ---
 
 # Packages to install
-carbon_packages:
+carbon_pkgs:
   - graphite-carbon

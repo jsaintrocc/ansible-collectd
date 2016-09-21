@@ -4,4 +4,4 @@
   service:
     name: "{{ item }}"
     state: restarted
-  with_items: carbon_services
+  with_items: "{{ carbon_services }}"

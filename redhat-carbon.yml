@@ -1,0 +1,5 @@
+---
+- hosts: pistorestat-cc38-h01
+  become: true
+  roles:
+    - carbon

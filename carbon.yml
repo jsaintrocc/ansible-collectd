@@ -1,0 +1,5 @@
+---
+- hosts: statsclients
+  become: true
+  roles:
+    - carbon
